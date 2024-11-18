@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Movies in database</h1>
+  <ul>
+    {% for movie in object_list %}
+      <li>
+        {{ movie.title }} ({{ movie.released.year }}) - {{ movie.genre.name }}
+      </li>
+    {% endfor %}
+  </ul>
+  {% if not object_list %}
+    <p>No movies in database</p>
+  {% endif %}
+  <a href="{% url 'movie_add' %}" class="btn btn-primary">Add movie</a>
+{% endblock %}

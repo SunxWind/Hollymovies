@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Genres in database</h1>
+    <table class="table table-striped table-hover">
+        {% for genre in object_list %}
+          <tr>
+              <td>{{ genre.name }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+  {% if not object_list %}
+    <p>No genres in database</p>
+  {% endif %}
+  <a href="{% url 'genre_add' %}" class="btn btn-primary">Add genre</a>
+{% endblock %}
