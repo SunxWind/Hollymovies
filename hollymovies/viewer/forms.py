@@ -52,14 +52,14 @@ class ActorModelForm(ModelForm):
         }
 
 
-class ActorForm(ModelForm):
+class ActorForm(ActorModelForm):
 
-    class Meta:
-        model = Actor
-        fields = '__all__'
-        widgets = {
-            'birth_date': DateInput(attrs={'type': 'date'})
-        }
+    # class Meta:
+    #     model = Actor
+    #     fields = '__all__'
+    #     widgets = {
+    #         'birth_date': DateInput(attrs={'type': 'date'})
+    #     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -3,27 +3,27 @@
 {% block content %}
     <h1>Movies in database</h1>
     <table class="table table-striped table-hover">
-    <tr>
-      <th>Title</th>
-      <th>Genre</th>
-      <th>Rating</th>
-      <th>Released</th>
-      <th>Description</th>
-      {% if user.is_authenticated %}
-      <th>Edit</th>
-      {% endif %}
-    </tr>
-    {% for movie in object_list %}
-    <tr>
-      <td>{{ movie.title }}</td>
-      <td>{{ movie.genre.name }}</td>
-      <td>{{ movie.rating }}</td>
-      <td>{{ movie.released.year }}</td>
-      <td>{{ movie.description }}</td>
-      {% if user.is_authenticated %}
-      <td><a href="{%url 'movie_update' movie.id %}" class="btn btn-info">Edit</a></td>
-      {% endif %}
-    </tr>
+        <tr>
+          <th>Title</th>
+          <th>Genre</th>
+          <th>Rating</th>
+          <th>Released</th>
+          <th>Description</th>
+          {% if user.is_authenticated %}
+          <th>Edit</th>
+          {% endif %}
+        </tr>
+        {% for movie in object_list %}
+        <tr>
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.genre.name }}</td>
+          <td>{{ movie.rating }}</td>
+          <td>{{ movie.released.year }}</td>
+          <td>{{ movie.description }}</td>
+          {% if user.is_authenticated %}
+          <td><a href="{%url 'movie_update' movie.id %}" class="btn btn-info">Edit</a></td>
+          {% endif %}
+        </tr>
     {% endfor %}
     </table>
   {% if not object_list %}

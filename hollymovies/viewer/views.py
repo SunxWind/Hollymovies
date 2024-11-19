@@ -119,6 +119,11 @@ class MovieUpdateView(UpdateView):
     model = Movie
     success_url = reverse_lazy('movies')
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/movies')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ActorView(ListView):
     template_name = "actors.html"
@@ -130,9 +135,29 @@ class ActorCreateView(FormView):
     form_class = ActorForm
     success_url = reverse_lazy('actors')
 
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        Actor.objects.create(
+            firstname=cleaned_data['firstname'],
+            lastname=cleaned_data['lastname'],
+            birth_date=cleaned_data['birth_date']
+        )
+        return result
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/actors')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ActorUpdateView(UpdateView):
     template_name = 'actor_form.html'
     form_class = ActorForm
     model = Actor
     success_url = reverse_lazy('actors')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/actors')
+        return super().dispatch(request, *args, **kwargs)
